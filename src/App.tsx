@@ -1,12 +1,27 @@
 
 import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import EventDetailsPage from './pages/EventDetailsPage'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 function App() {
 
 
   return (
-    <div>
-      <h1>Hello World</h1>
+    <div className="min-h-screen bg-gray-100 text-gray-800">
+
+      {/* common component */}
+      <Header />
+      {/* Routes */}
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/events/:id' element={<EventDetailsPage />} />
+      </Routes>
+
+      {/* common component */}
+      <Footer />
     </div>
   )
 }
