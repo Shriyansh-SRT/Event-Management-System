@@ -1,45 +1,61 @@
-
-import { Typography, Container, Box, Button } from '@mui/material'
-import { Link } from 'react-router-dom'
-import EventCard from '../components/EventCard'
-import { getEventsFromLocalStorage } from '../utils/storage'
-// import EventList from '../components/EventList'
+import EventCard from "../components/EventCard";
+import { getEventsFromLocalStorage } from "../utils/storage";
+import HeroSection from "../components/HeroSection";
+import { Container } from "@mui/material";
+import { useState, useEffect } from "react";
+import type { Event } from "../types/event.types";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
+  const [events, setEvents] = useState<Event[]>([]);
 
-  const events = getEventsFromLocalStorage();
-  console.log(events)
+  useEffect(() => {
+    const loadedEvents = getEventsFromLocalStorage();
+    setEvents(loadedEvents);
+  }, []);
 
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
-      {/* Introduction */}
-      <Box textAlign="center" mb={6}>
-        <Typography variant="h3" fontWeight="bold" color="primary" gutterBottom>
-          Welcome to the Event Management System
-        </Typography>
-        <Typography variant="body1" color="text.secondary" maxWidth="md" mx="auto">
-          Manage and explore events for your organization with ease. Stay up to date and keep everything in one place.
-        </Typography>
-      </Box>
+    <div>
+      {/* Hero */}
+      <HeroSection />
 
-      {/* Event List */}
-      <Box className='flex items-center justify-between'>
-        <Box>
-        <Typography variant="h5" fontWeight="medium" mb={3}>
-          Upcoming Events
-        </Typography>
-        {
-          events.map((event) => 
-            <EventCard key={event.id} event={event} />)
-        }
-        </Box>
-        
-        <Link to="/events/new">
-          <Button variant='contained' color='primary'>Add Event</Button>
-        </Link>
-      </Box>
-    </Container>
-  )
-}
+      {/* Main Container */}
+      <Container maxWidth="xl" sx={{ py: 10 }}>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">
+            Upcoming Events
+          </h2>
+          <p className="text-gray-500">
+            Explore the latest happenings and don't miss out!
+          </p>
+        </div>
 
-export default HomePage
+        {/* Event Grid with consistent card sizes */}
+        <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 gap-6 justify-items-center">
+          {events.map((event) => (
+            <div key={event.id} className="w-full max-w-sm">
+              <Link to={`/events/${event.id}`} className="block h-full">
+                <EventCard event={event} />
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        {/* Empty State */}
+        {events.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-500 text-lg">No events found</p>
+            <Link
+              to="/create-event"
+              className="text-blue-600 hover:text-blue-800 mt-2 inline-block"
+            >
+              Create your first event
+            </Link>
+          </div>
+        )}
+      </Container>
+    </div>
+  );
+};
+
+export default HomePage;

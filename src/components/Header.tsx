@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header className="w-full shadow-md bg-blue-400 text-white">
+    <header className="w-full shadow-md bg-[#111628] text-white">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo / Title */}
@@ -14,7 +14,7 @@ const Header = () => {
           </Link>
 
           {/* Navigation Links */}
-          <nav className="flex items-center gap-6 text-sm sm:text-base">
+          <nav className="flex items-center gap-6 space-x-6 text-sm sm:text-base">
             <Link to="/" className="hover:underline hover:opacity-90 transition duration-200">
               Home
             </Link>

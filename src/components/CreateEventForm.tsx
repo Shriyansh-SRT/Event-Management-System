@@ -1,18 +1,17 @@
 // CreateEventForm.tsx
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Box,
   Button,
   MenuItem,
   TextField,
   Typography,
-  Paper
+  Paper,
 } from "@mui/material";
-import {saveEventToLocalStorage} from "../utils/storage"
-import { v4 as uuidv4 } from 'uuid';
-
+import { saveEventToLocalStorage } from "../utils/storage";
+import { v4 as uuidv4 } from "uuid";
 
 const CreateEventSchema = z.object({
   title: z.string().min(3, { message: "Title is required" }),
@@ -21,10 +20,19 @@ const CreateEventSchema = z.object({
   date: z.string().min(1, { message: "Date is required" }),
   time: z.string().min(1, { message: "Time is required" }).optional(),
   image: z.string().url("Invalid image").optional(),
-  category: z.enum([
-    "music", "art", "sports", "technology", "food",
-    "Business", "Health", "Education", "Other"
-  ]).optional(),
+  category: z
+    .enum([
+      "music",
+      "art",
+      "sports",
+      "technology",
+      "food",
+      "Business",
+      "Health",
+      "Education",
+      "Other",
+    ])
+    .optional(),
 });
 
 type CreateEventFormData = z.infer<typeof CreateEventSchema>;
@@ -35,7 +43,7 @@ const CreateEventForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-    watch
+    watch,
   } = useForm<CreateEventFormData>({
     resolver: zodResolver(CreateEventSchema),
     defaultValues: {
@@ -46,19 +54,26 @@ const CreateEventForm = () => {
       time: "",
       image: "",
       category: "Other",
-    }
+    },
   });
 
   const onSubmit = (data: CreateEventFormData) => {
-    const newEvent = {...data, id: uuidv4()};
-    saveEventToLocalStorage(newEvent)
-    reset()
-    alert("Event created successfully")
+    const newEvent = { ...data, id: uuidv4() };
+    saveEventToLocalStorage(newEvent);
+    reset();
+    alert("Event created successfully");
   };
 
   return (
-    <Paper elevation={3} className="max-w-6xl mx-auto p-8 shadow-md bg-white rounded-xl mt-10">
-      <Typography variant="h5" component="h1" className="mb-6 text-center font-bold">
+    <Paper
+      elevation={3}
+      className="max-w-6xl mx-auto p-8 shadow-md bg-white rounded-xl mt-10"
+    >
+      <Typography
+        variant="h5"
+        component="h1"
+        className="mb-6 text-center font-bold"
+      >
         Create New Event
       </Typography>
 
@@ -69,59 +84,74 @@ const CreateEventForm = () => {
         noValidate
       >
         <TextField
-          fullWidth label="Title"
+          fullWidth
+          label="Title"
           {...register("title")}
           error={!!errors.title}
           helperText={errors.title?.message}
         />
 
         <TextField
-          fullWidth label="Description"
+          fullWidth
+          label="Description"
           {...register("description")}
           error={!!errors.description}
           helperText={errors.description?.message}
         />
 
         <TextField
-          fullWidth label="Venue"
+          fullWidth
+          label="Venue"
           {...register("venue")}
           error={!!errors.venue}
           helperText={errors.venue?.message}
         />
 
         <TextField
-          fullWidth type="date" label="Date"
-   
+          fullWidth
+          type="date"
+          label="Date"
           {...register("date")}
           error={!!errors.date}
           helperText={errors.date?.message}
         />
 
         <TextField
-          fullWidth type="time" label="Time"
-
+          fullWidth
+          type="time"
+          label="Time"
           {...register("time")}
           error={!!errors.time}
           helperText={errors.time?.message}
         />
 
         <TextField
-          fullWidth label="Image URL"
+          fullWidth
+          label="Image URL"
           {...register("image")}
           error={!!errors.image}
           helperText={errors.image?.message}
         />
 
         <TextField
-          select fullWidth label="Category"
+          select
+          fullWidth
+          label="Category"
           {...register("category")}
           error={!!errors.category}
           helperText={errors.category?.message}
           value={watch("category") || "Other"}
         >
           {[
-            "music", "art", "sports", "technology", "food",
-            "Business", "Health", "Education", "Other"
+            "music",
+            "art",
+            "sports",
+            "technology",
+            "food",
+            "Business",
+            "Health",
+            "Education",
+            "Other",
           ].map((option) => (
             <MenuItem key={option} value={option}>
               {option[0].toUpperCase() + option.slice(1)}
