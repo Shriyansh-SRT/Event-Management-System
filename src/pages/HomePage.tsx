@@ -1,8 +1,15 @@
 
-import { Typography, Container, Box } from '@mui/material'
+import { Typography, Container, Box, Button } from '@mui/material'
+import { Link } from 'react-router-dom'
+import EventCard from '../components/EventCard'
+import { getEventsFromLocalStorage } from '../utils/storage'
 // import EventList from '../components/EventList'
 
 const HomePage = () => {
+
+  const events = getEventsFromLocalStorage();
+  console.log(events)
+
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
       {/* Introduction */}
@@ -16,11 +23,20 @@ const HomePage = () => {
       </Box>
 
       {/* Event List */}
-      <Box>
+      <Box className='flex items-center justify-between'>
+        <Box>
         <Typography variant="h5" fontWeight="medium" mb={3}>
           Upcoming Events
         </Typography>
-        {/* <EventList /> */}
+        {
+          events.map((event) => 
+            <EventCard key={event.id} event={event} />)
+        }
+        </Box>
+        
+        <Link to="/events/new">
+          <Button variant='contained' color='primary'>Add Event</Button>
+        </Link>
       </Box>
     </Container>
   )
