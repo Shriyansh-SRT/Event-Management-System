@@ -5,6 +5,7 @@ import { Container } from "@mui/material";
 import { useState, useEffect } from "react";
 import type { Event } from "../types/event.types";
 import { Link } from "react-router-dom";
+import CalendarView from "../components/CalendarView";
 
 const HomePage = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -34,9 +35,7 @@ const HomePage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 gap-6 justify-items-center">
           {events.map((event) => (
             <div key={event.id} className="w-full max-w-sm">
-              <Link to={`/events/${event.id}`} className="block h-full">
-                <EventCard event={event} />
-              </Link>
+              <EventCard event={event} />
             </div>
           ))}
         </div>
@@ -53,6 +52,10 @@ const HomePage = () => {
             </Link>
           </div>
         )}
+      </Container>
+
+      <Container maxWidth="xl">
+        <CalendarView events={events} />
       </Container>
     </div>
   );
