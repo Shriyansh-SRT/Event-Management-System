@@ -12,7 +12,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const locales = {
@@ -42,7 +42,7 @@ const CalendarView = ({ events }: Props) => {
     id: event.id,
   }));
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <Accordion>
@@ -65,9 +65,9 @@ const CalendarView = ({ events }: Props) => {
           sx={{ height: 700, backgroundColor: "white", p: 2, borderRadius: 2 }}
         >
           <Calendar
-            onSelectEvent={(event: CalendarEvent) =>
-              navigate(`/events/${event.id}`)
-            }
+            // onSelectEvent={(event: CalendarEvent) =>
+            //   navigate(`/events/${event.id}`)
+            // }
             localizer={localizer}
             events={calendarEvents}
             startAccessor="start"
