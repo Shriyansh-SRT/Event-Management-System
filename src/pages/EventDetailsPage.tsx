@@ -9,6 +9,7 @@ import LocationPinIcon from "@mui/icons-material/LocationPin";
 import EditEventForm from "../components/EditEventForm";
 import { useNavigate } from "react-router-dom";
 import { useEventStore } from "../stores/useEventStore";
+import { toast } from "react-hot-toast";
 
 const EventDetailsPage = () => {
   const { id } = useParams();
@@ -31,12 +32,12 @@ const EventDetailsPage = () => {
 
   const handleUpdateEvent = (updatedEvent: Event) => {
     updateEvent(updatedEvent);
-    alert("Event updated successfully");
+    toast.success("Event updated successfully");
   };
 
   const handleDeleteEvent = () => {
     removeEvent(id || "");
-    alert("Event deleted successfully");
+    toast.success("Event deleted successfully");
     navigate("/");
   };
 

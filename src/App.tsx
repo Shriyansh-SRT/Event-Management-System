@@ -8,12 +8,15 @@ import CreateEventPage from "./pages/CreateEventPage";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToHashElement from "./components/ScrollToHashElement";
 import AllEventsPage from "./pages/AllEventsPage";
+import SearchResultsPage from "./pages/SearchResultspage";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800">
       <ScrollToTop />
       <ScrollToHashElement />
+      <Toaster position="top-right" />
       {/* common component */}
       <Header />
       {/* Routes */}
@@ -22,6 +25,7 @@ function App() {
         <Route path="/events/:id" element={<EventDetailsPage />} />
         <Route path="/events/new" element={<CreateEventPage />} />
         <Route path="/all-events" element={<AllEventsPage />} />
+        <Route path="/events/search" element={<SearchResultsPage />} />
       </Routes>
 
       {/* common component */}

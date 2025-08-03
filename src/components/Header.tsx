@@ -2,14 +2,13 @@ import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="w-full shadow-md bg-[#111628] text-white">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+    <header className="w-full shadow-md bg-[#101828] text-white">
+      <div className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex items-center justify-between h-16">
-          {/* Logo / Title */}
           <div>
             <NavLink to="/">
               <h1 className="text-2xl font-extrabold tracking-wide">
-                Event Management
+                Eventora
               </h1>
             </NavLink>
           </div>
@@ -34,7 +33,7 @@ const Header = () => {
                   : "hover:underline hover:opacity-90 transition duration-200"
               }
             >
-              Events
+              Discover Events
             </NavLink>
             <NavLink
               to="/events/new"

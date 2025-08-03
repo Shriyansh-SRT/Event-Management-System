@@ -14,6 +14,8 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
 import { useEventStore } from "../stores/useEventStore";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const CreateEventSchema = z.object({
   title: z.string().min(3, { message: "Title is required" }),
@@ -41,7 +43,7 @@ type CreateEventFormData = z.infer<typeof CreateEventSchema>;
 
 const CreateEventForm = () => {
   const addEvent = useEventStore((state) => state.addEvent);
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -66,7 +68,8 @@ const CreateEventForm = () => {
     // saveEventToLocalStorage(newEvent);
     addEvent(newEvent);
     reset();
-    alert("Event created successfully");
+    toast.success("Event created successfully");
+    navigate("/all-events");
   };
 
   return (

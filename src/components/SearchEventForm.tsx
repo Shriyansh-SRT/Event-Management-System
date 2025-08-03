@@ -12,7 +12,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const SearchEventForm = () => {
-  const events = useEventStore((state) => state.events);
+  // const events = useEventStore((state) => state.events);
   const loadEventsFromStorage = useEventStore(
     (state) => state.loadEventsFromStorage
   );
@@ -27,19 +27,26 @@ const SearchEventForm = () => {
   }, []);
 
   const handleSearch = () => {
-    const filteredEvent = events.find(
-      (event) =>
-        event.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (category === "All" || event.category === category) &&
-        (!date ||
-          new Date(event.date).toDateString() === new Date(date).toDateString())
-    );
+    // const filteredEvent = events.find(
+    //   (event) =>
+    //     event.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    //     (category === "All" || event.category === category) &&
+    //     (!date ||
+    //       new Date(event.date).toDateString() === new Date(date).toDateString())
+    // );
 
-    if (filteredEvent) {
-      navigate(`/events/${filteredEvent.id}`);
-    } else {
-      alert("No matching event found.");
-    }
+    // if (filteredEvent) {
+    //   navigate(`/events/${filteredEvent.id}`);
+    // } else {
+    //   alert("No matching event found.");
+    // }
+    const query = new URLSearchParams();
+
+    if (searchTerm) query.set("title", searchTerm);
+    if (category && category !== "All") query.set("category", category);
+    if (date) query.set("date", date);
+
+    navigate(`/events/search?${query.toString()}`);
   };
 
   return (

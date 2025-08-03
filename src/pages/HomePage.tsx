@@ -2,7 +2,7 @@ import EventCard from "../components/EventCard";
 // import { getEventsFromLocalStorage } from "../utils/storage";
 import HeroSection from "../components/HeroSection";
 import { Container } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 // import type { Event } from "../types/event.types";
 import { Link } from "react-router-dom";
 import CalendarView from "../components/CalendarView";
@@ -15,6 +15,15 @@ const HomePage = () => {
   const loadEventsFromStorage = useEventStore(
     (state) => state.loadEventsFromStorage
   );
+
+  const upcomingEvents = useMemo(() => {
+    const now = new Date();
+
+    return events
+      .filter((event) => new Date(event.date) >= now)
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      .slice(0, 6); // take top 6 soonest events
+  }, [events]);
 
   useEffect(() => {
     loadEventsFromStorage();
@@ -38,7 +47,7 @@ const HomePage = () => {
 
         {/* Event Grid with consistent card sizes */}
         <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 gap-6 justify-items-center">
-          {events.map((event) => (
+          {upcomingEvents.map((event) => (
             <div key={event.id} className="w-full max-w-sm">
               <EventCard event={event} />
             </div>
