@@ -6,13 +6,13 @@ const Header = () => {
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo / Title */}
-          <NavLink to="/">
-            <h1 className="text-2xl font-extrabold tracking-wide">
-              Event Management
-            </h1>
-          </NavLink>
-
-          {/* <SearchEventForm events={[]} /> */}
+          <div>
+            <NavLink to="/">
+              <h1 className="text-2xl font-extrabold tracking-wide">
+                Event Management
+              </h1>
+            </NavLink>
+          </div>
 
           {/* Navigation Links */}
           <nav className="flex items-center gap-6 space-x-6 text-sm sm:text-base">
@@ -27,7 +27,7 @@ const Header = () => {
               Home
             </NavLink>
             <NavLink
-              to="/#upcomingEvents"
+              to="/all-events"
               className={({ isActive }) =>
                 isActive
                   ? "text-white font-bold border-b-2 border-white transition duration-200"

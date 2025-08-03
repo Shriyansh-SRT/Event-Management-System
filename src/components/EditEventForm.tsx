@@ -16,8 +16,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useEffect, useState } from "react";
 import type { Event } from "../types/event.types";
-import { getEventsFromLocalStorage } from "../utils/storage";
 import dayjs from "dayjs";
+import { useEventStore } from "../stores/useEventStore";
 
 type EditEventFormProps = {
   event: Event | null;
@@ -48,7 +48,7 @@ type EditEventFormData = z.infer<typeof EditEventSchema>;
 
 const EditEventForm = ({ event, onUpdateEvent }: EditEventFormProps) => {
   const [open, setOpen] = useState(false);
-
+  const events = useEventStore((state) => state.events);
   const {
     register,
     handleSubmit,
@@ -101,9 +101,7 @@ const EditEventForm = ({ event, onUpdateEvent }: EditEventFormProps) => {
         return;
       }
 
-      const allEvents = getEventsFromLocalStorage();
-
-      const hasCollision = allEvents.some((e) => {
+      const hasCollision = events.some((e) => {
         const isSameEvent = e.id === event.id;
         const isSameDate = e.date === data.date;
         const isSameVenue =

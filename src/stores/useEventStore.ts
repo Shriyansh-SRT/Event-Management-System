@@ -39,24 +39,26 @@ export const useEventStore = create<EventStore>((set, get) => ({
   },
 
   addEvent: (event: Event) => {
-    const events = get().events;
-    const newEvents = [...events, event];
-    set({ events: newEvents });
-    saveEvents(newEvents);
+    set((state) => ({
+      events: [...state.events, event],
+    }));
+    saveEvents(get().events);
   },
+
   removeEvent: (id: string) => {
-    const events = get().events;
-    const filteredEvents = events.filter((event) => event.id !== id);
-    set({ events: filteredEvents });
-    saveEvents(filteredEvents);
+    set((state) => ({
+      events: state.events.filter((event) => event.id !== id),
+    }));
+    saveEvents(get().events);
   },
 
   updateEvent: (event: Event) => {
-    const events = get().events;
-    const updatedEvents = events.map((e) => (e.id === event.id ? event : e));
-    set({ events: updatedEvents });
-    saveEvents(updatedEvents);
+    set((state) => ({
+      events: state.events.map((e) => (e.id === event.id ? event : e)),
+    }));
+    saveEvents(get().events);
   },
+
   getEventById: (id: string) => {
     const events = get().events;
     return events.find((event) => event.id === id);

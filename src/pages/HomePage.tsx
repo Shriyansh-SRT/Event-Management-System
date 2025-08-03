@@ -1,19 +1,24 @@
 import EventCard from "../components/EventCard";
-import { getEventsFromLocalStorage } from "../utils/storage";
+// import { getEventsFromLocalStorage } from "../utils/storage";
 import HeroSection from "../components/HeroSection";
 import { Container } from "@mui/material";
-import { useState, useEffect } from "react";
-import type { Event } from "../types/event.types";
+import { useEffect } from "react";
+// import type { Event } from "../types/event.types";
 import { Link } from "react-router-dom";
 import CalendarView from "../components/CalendarView";
+import { useEventStore } from "../stores/useEventStore";
 
 const HomePage = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  // const [events, setEvents] = useState<Event[]>([]);
+
+  const events = useEventStore((state) => state.events);
+  const loadEventsFromStorage = useEventStore(
+    (state) => state.loadEventsFromStorage
+  );
 
   useEffect(() => {
-    const loadedEvents = getEventsFromLocalStorage();
-    setEvents(loadedEvents);
-  }, []);
+    loadEventsFromStorage();
+  }, [loadEventsFromStorage]);
 
   return (
     <div>

@@ -10,9 +10,10 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
-import { saveEventToLocalStorage } from "../utils/storage";
+// import { saveEventToLocalStorage } from "../utils/storage";
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
+import { useEventStore } from "../stores/useEventStore";
 
 const CreateEventSchema = z.object({
   title: z.string().min(3, { message: "Title is required" }),
@@ -39,6 +40,8 @@ const CreateEventSchema = z.object({
 type CreateEventFormData = z.infer<typeof CreateEventSchema>;
 
 const CreateEventForm = () => {
+  const addEvent = useEventStore((state) => state.addEvent);
+
   const {
     register,
     handleSubmit,
@@ -60,7 +63,8 @@ const CreateEventForm = () => {
 
   const onSubmit = (data: CreateEventFormData) => {
     const newEvent = { ...data, id: uuidv4() };
-    saveEventToLocalStorage(newEvent);
+    // saveEventToLocalStorage(newEvent);
+    addEvent(newEvent);
     reset();
     alert("Event created successfully");
   };

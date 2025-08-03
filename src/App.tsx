@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import CreateEventPage from "./pages/CreateEventPage";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToHashElement from "./components/ScrollToHashElement";
+import AllEventsPage from "./pages/AllEventsPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/events/:id" element={<EventDetailsPage />} />
         <Route path="/events/new" element={<CreateEventPage />} />
+        <Route path="/all-events" element={<AllEventsPage />} />
       </Routes>
 
       {/* common component */}

@@ -1,47 +1,44 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import type { Event } from "../types/event.types";
-import { getEventFromId, removeEventFromLocalStorage } from "../utils/storage";
 import dayjs from "dayjs";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LabelIcon from "@mui/icons-material/Label";
 import LocationPinIcon from "@mui/icons-material/LocationPin";
 import EditEventForm from "../components/EditEventForm";
-import { updateEventInLocalStorage } from "../utils/storage";
 import { useNavigate } from "react-router-dom";
+import { useEventStore } from "../stores/useEventStore";
 
 const EventDetailsPage = () => {
   const { id } = useParams();
-  const [event, setEvent] = useState<Event | null>(null);
+
+  const event = useEventStore((state) =>
+    state.events.find((event) => event.id === id)
+  );
+  const updateEvent = useEventStore((state) => state.updateEvent);
+  const removeEvent = useEventStore((state) => state.removeEvent);
+  const loadEventsFromStorage = useEventStore(
+    (state) => state.loadEventsFromStorage
+  );
+
   const navigate = useNavigate();
+
   useEffect(() => {
-    const event = getEventFromId(id || "");
+    loadEventsFromStorage();
     if (!event) return;
-    setEvent(event);
-  }, [id]);
+  }, []);
 
   const handleUpdateEvent = (updatedEvent: Event) => {
-    const updatedEvents = updateEventInLocalStorage(updatedEvent);
-    const updatedEventResult = updatedEvents.find(
-      (e: Event) => e.id === updatedEvent.id
-    ) as Event;
-    if (updatedEventResult) {
-      setEvent(updatedEventResult);
-      alert("Event updated successfully");
-    }
+    updateEvent(updatedEvent);
+    alert("Event updated successfully");
   };
 
   const handleDeleteEvent = () => {
-    const updatedEvents = removeEventFromLocalStorage(id || "");
-    if (updatedEvents) {
-      setEvent(null);
-      alert("Event deleted successfully");
-    }
+    removeEvent(id || "");
+    alert("Event deleted successfully");
     navigate("/");
   };
-
-  console.log(event, "eventsss");
 
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen">
@@ -72,7 +69,10 @@ const EventDetailsPage = () => {
             </p>
           </div>
           <div className="flex gap-5 justify-end">
-            <EditEventForm event={event} onUpdateEvent={handleUpdateEvent} />
+            <EditEventForm
+              event={event || null}
+              onUpdateEvent={handleUpdateEvent}
+            />
             <button
               onClick={handleDeleteEvent}
               className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-all duration-300 cursor-pointer"
