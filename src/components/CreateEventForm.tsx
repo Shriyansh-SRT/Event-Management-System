@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { saveEventToLocalStorage } from "../utils/storage";
 import { v4 as uuidv4 } from "uuid";
+import dayjs from "dayjs";
 
 const CreateEventSchema = z.object({
   title: z.string().min(3, { message: "Title is required" }),
@@ -50,8 +51,8 @@ const CreateEventForm = () => {
       title: "",
       description: "",
       venue: "",
-      date: "",
-      time: "",
+      date: dayjs().format("YYYY-MM-DD"),
+      time: dayjs().format("HH:mm"),
       image: "",
       category: "Other",
     },
@@ -72,7 +73,12 @@ const CreateEventForm = () => {
       <Typography
         variant="h5"
         component="h1"
-        className="mb-6 text-center font-bold"
+        className=" text-center font-bold text-2xl mb-6"
+        sx={{
+          fontSize: "2rem",
+          fontWeight: "bold",
+          marginBottom: "1rem",
+        }}
       >
         Create New Event
       </Typography>
@@ -80,7 +86,7 @@ const CreateEventForm = () => {
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-10"
+        className="flex flex-col gap-4"
         noValidate
       >
         <TextField

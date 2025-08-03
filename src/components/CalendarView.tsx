@@ -62,7 +62,7 @@ const CalendarView = ({ events }: Props) => {
 
       <AccordionDetails>
         <Box
-          sx={{ height: 600, backgroundColor: "white", p: 2, borderRadius: 2 }}
+          sx={{ height: 700, backgroundColor: "white", p: 2, borderRadius: 2 }}
         >
           <Calendar
             onSelectEvent={(event: CalendarEvent) =>

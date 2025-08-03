@@ -21,7 +21,7 @@ const HomePage = () => {
       <HeroSection />
 
       {/* Main Container */}
-      <Container maxWidth="xl" sx={{ py: 10 }}>
+      <Container maxWidth="xl" sx={{ py: 10 }} id="upcomingEvents">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-800 mb-2">
             Upcoming Events

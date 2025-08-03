@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -17,16 +17,17 @@ const HeroSection = () => {
           Plan or Book Your Next Event Today
         </h1>
         <p className="text-lg text-white max-w-xl mb-6 drop-shadow-sm">
-          Discover and manage events with ease. Whether you're attending or hosting, we’ve got you covered.
+          Discover and manage events with ease. Whether you're attending or
+          hosting, we’ve got you covered.
         </p>
         <Link to="/events/new">
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded shadow-lg transition">
+          <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded shadow-lg transition cursor-pointer">
             Create an Event
           </button>
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HeroSection
+export default HeroSection;

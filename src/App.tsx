@@ -6,11 +6,13 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CreateEventPage from "./pages/CreateEventPage";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollToHashElement from "./components/ScrollToHashElement";
 
 function App() {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800">
       <ScrollToTop />
+      <ScrollToHashElement />
       {/* common component */}
       <Header />
       {/* Routes */}

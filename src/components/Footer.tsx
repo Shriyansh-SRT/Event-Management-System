@@ -1,6 +1,3 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white py-6 mt-10 w-full">
@@ -12,13 +9,17 @@ const Footer = () => {
 
         {/* Right - Links */}
         <div className="flex gap-4">
-          <Link to="/privacy" className="hover:text-gray-300 transition">Privacy Policy</Link>
-          <Link to="/terms" className="hover:text-gray-300 transition">Terms</Link>
-          <Link to="/contact" className="hover:text-gray-300 transition">Contact</Link>
+          <p className="hover:text-gray-300 transition cursor-pointer">
+            Privacy Policy
+          </p>
+          <p className="hover:text-gray-300 transition cursor-pointer">Terms</p>
+          <p className="hover:text-gray-300 transition cursor-pointer">
+            Contact
+          </p>
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
