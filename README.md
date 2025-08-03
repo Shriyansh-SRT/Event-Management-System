@@ -1,69 +1,66 @@
-# React + TypeScript + Vite
+# Event Management App
+This is a simple Event Management application built with React, TypeScript, and Vite. It allows users to create, view, edit, and delete events stored locally in the browser's localStorage.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Features
+  1.Add new events with title, description, venue, date, time, image URL, and category and Calendar view is presented
+  2.View list of all events
+  3. Update events with validation to prevent date and venue collisions
+  4. Delete events
+  5. Events data stored in browser's localStorage
+  6. Top 6 events are displayed in HomePage after creation
+  7. Searching, filtering and sorting by categorize 
 
-Currently, two official plugins are available:
+Prerequisites
+Node.js (version 16 or above recommended)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# npm or yarn package manager
 
-## Expanding the ESLint configuration
+# Setup Instructions
+1. Clone the repository
+  git clone https://github.com/your-username/event-management-app.git
+  cd event-management-app
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+3. Install dependencies
+  Using npm:
+  npm install
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+  Or using yarn:
+  yarn
+  
+3. Run the development server
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+  npm run dev
+  This will start the development server at http://localhost:5173 (or another available port).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4. Build the production version
+  npm run build
+  This generates an optimized production build in the dist folder.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+5. Preview the production build locally (optional)
+  npm run preview
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+7. Deploy to Netlify
+  Connect your GitHub repository to Netlify.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+# Set the build command to:
+  npm run build
+# Set the publish directory to:
+  dist
+  
+Trigger deploy from Netlify dashboard or by pushing to your main branch.
+
+Notes
+Event data is stored in the browser's localStorage. Clearing browser data will remove all events.
+For multi-user or persistent storage, consider integrating a backend or cloud database.
+
+
+# Technologies Used
+  React 19
+  TypeScript
+  Vite
+  Material UI
+  react-hook-form & zod for form validation
+  dayjs for date/time formatting
+  zustand for state management
+  react-hot-toast for notifications
+  react big calendar
